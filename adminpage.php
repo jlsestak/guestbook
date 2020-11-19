@@ -6,9 +6,10 @@
  */
 
 //turn on error reporting
+/*
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-
+*/
 //includes files
 include ('includes/head.html');
 require ('includes/dbcreds.php');
@@ -34,16 +35,17 @@ require ('includes/dbcreds.php');
             <td>LinkedIn</td>
             <td>Email</td>
             <td>Where we met</td>
+            <td>Message</td>
             <td>Mailing</td>
             <td>TimeStamp</td>
 
         </tr>
         </thead>
-        <tbody>
-        <?php
+    <tbody>
+    <?php
         $sql ="SELECT * FROM guests";
         $result = mysqli_query($cnxn, $sql);
-        // var_dump($result);
+       // var_dump($result);
         foreach($result as $row){
             $guest_id = $row['guest_id'];
             $fullname = $row['fname']." ".$row['lname'];
@@ -54,7 +56,7 @@ require ('includes/dbcreds.php');
             $meet = $row['meet'];
             $message = $row['message'];
             $mailing = $row['mailing'];
-            $time_stamp = date("M d, Y", strtotime($row['time_stamp']));
+            $time_stamp = date("M d, Y g:i a", strtotime($row['time_stamp']));
             echo "<tr>";
             echo "<td>$guest_id</td>";
             echo "<td>$fullname</td>";
@@ -68,9 +70,9 @@ require ('includes/dbcreds.php');
             echo "<td>$time_stamp</td>";
             echo "</tr>";
         }
-        ?>
-        </tbody>
-    </table>
+    ?>
+    </tbody>
+        </table>
     <div class="container text-center">
         <a href="index.php" class="btn btn-info" role="button">Guestbook Form</a>
     </div>
@@ -85,7 +87,13 @@ require ('includes/dbcreds.php');
 <script src="scripts/form.js"></script>
 <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script>
-    $('#guest-table').DataTable();
+
+    $(document).ready(function() {
+        $('#guest-table').DataTable( {
+            "order": [[ 9, "desc" ]]
+        } );
+    } );
+
 </script>
 </body>
 </html>
