@@ -4,7 +4,7 @@
  * This is a guestbook form that allows users to fill out my guestbook
  */
 include ('includes/head.html');
-require ('includes/dbcreds.php');
+
 ?>
 <body>
 <!-- Jumbotron -->
