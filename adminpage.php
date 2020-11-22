@@ -10,9 +10,10 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 */
+
 //includes files
 include ('includes/head.html');
-require ('includes/dbcreds.php');
+require('includes/dbcreds.php');
 
 ?>
 
@@ -45,7 +46,7 @@ require ('includes/dbcreds.php');
     <?php
         $sql ="SELECT * FROM guests";
         $result = mysqli_query($cnxn, $sql);
-       // var_dump($result);
+       // print the table
         foreach($result as $row){
             $guest_id = $row['guest_id'];
             $fullname = $row['fname']." ".$row['lname'];
@@ -87,7 +88,7 @@ require ('includes/dbcreds.php');
 <script src="scripts/form.js"></script>
 <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script>
-
+    //get table format with order time descending
     $(document).ready(function() {
         $('#guest-table').DataTable( {
             "order": [[ 9, "desc" ]]
