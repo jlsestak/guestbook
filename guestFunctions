@@ -1,0 +1,55 @@
+<?php
+/*
+ * Jessica Sestak
+ * guestFunctions.php creates the functions that validate my guest form
+ */
+
+//Validate name
+function validName($name)
+{
+    return !empty($name); // && ctype_alpha($name);
+}
+
+//Validate mailing
+function validMailing($mailing)
+{
+    return $mailing == "html" or $mailing == "text";
+}
+
+//validate Email
+function validEmail($email)
+{
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return false;
+    } else {
+
+        return true;
+    }
+}
+
+//validate LinkedIn
+function validLinkedin($linkedin)
+{
+    if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $linkedin)) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+//Validate How we met
+function validMeetSelect($meetSelect)
+{
+    if ($meetSelect == "none") {
+        return false;
+    }
+    $validMeet = array("Meetup", "Job Fair", "Not Met");
+    //Check each topping and return false if it's not valid
+    foreach ($meetSelect as $meetSelectCheck) {
+        if (!in_array($meetSelectCheck, $validMeet)) {
+            return false;
+        }
+    }
+    //All toppings are valid
+    return true;
+}
